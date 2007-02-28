@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<window id="requestHeaders" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        title="Request Headers"
+        xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="Headers.init(window.arguments[0])">
+   <script type="application/x-javascript" src="chrome://poster/content/Headers.js"/>
+   <keyset>
+      <key keycode="VK_DELETE" oncommand="Headers.doDelete()"/>
+   </keyset>
+   <hbox align="center" flex="1">
+      <label value="Name:"/><textbox id="name"  flex="1"/><label value="Value:"/><textbox id="value" flex="2"/><button label="Add/Change" oncommand="Headers.onAddChange()"/><button label="Delete All" oncommand="Headers.onDeleteAll()"/>
+   </hbox>
+   <listbox id="list" seltype="multiple" onselect="Headers.onSelectItem()">
+      <listhead>
+         <listheader label="Name"/>
+         <listheader label="Value"/>
+      </listhead>
+      <listcols>
+         <listcol flex="1"/>
+         <splitter/>
+         <listcol flex="2"/>
+      </listcols>
+   </listbox>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+
+</window>

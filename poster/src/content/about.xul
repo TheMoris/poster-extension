@@ -1,0 +1,28 @@
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<page id="about" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="URL Poster"
+        xmlns:h="http://www.w3.org/1999/xhtml">
+<description class="header">URL Poster</description>
+<groupbox>
+   <caption label="Author"/>
+   <description>
+      Alex Milowski is a long-time XML developer.  This tool was developed to help
+      test web services and other interactions with web resources.
+   </description>
+</groupbox>
+<groupbox>
+   <caption label="Feedback"/>
+   <description>
+      Comments, issues, suggestions?  Please contact me at alexml@milowski.org!  
+   </description>
+</groupbox>
+<description class="ident">&#xa9; 2006 Alex Milowski &lt;alexml@milowski.org></description>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+</page>
+

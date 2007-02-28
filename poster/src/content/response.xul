@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<window id="response" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        title="Response"
+        xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="Response.init(window.arguments[0])">
+   <script type="application/x-javascript" src="chrome://poster/content/Response.js"/>
+   <vbox  style="overflow: auto" flex="100">
+      <description id="title"/>
+      <hbox>
+         <label value="Status:"/>
+         <label id="code" value=""/>
+      </hbox>
+      <textbox id="content" multiline="true" flex="2"/>
+      <vbox>
+         <label value="Headers:"/>
+         <grid flex="1">
+            <columns>
+               <column/>
+               <column flex="1"/>
+            </columns>
+            <rows id="headers"/>
+         </grid>
+      </vbox>
+   </vbox>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+</window>
