@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<page id="posterSidebar" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Post/Put Content"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="App.init()">
+
+   <script type="application/x-javascript" src="chrome://poster/content/poster.js"/>
+   <script type="application/x-javascript" src="chrome://poster/content/HTTP.js"/> 
+   <vbox>
+   <groupbox flex="2">
+      <caption label="Request"/>
+      <description>Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
+      use the GET, HEAD, or DELETE methods on a URL.</description>
+      <grid flex="2">
+         <columns>
+            <column/>
+            <column flex="1"/>
+         </columns>
+         <rows>
+            <row>
+               <label value="URL:"/>
+               <textbox id="url" flex="2"/>
+            </row>
+            <row>
+               <label value="File:"/>
+               <hbox flex="1">
+                  <textbox id="filename" flex="2"/>
+                  <button id="browse-file" label="Browse..." tooltiptext="Browse for file." oncommand="App.browseForFile()"/>
+               </hbox>
+            </row>
+            <row>
+               <label value="Content Type:"/>
+               <textbox id="ctype" flex="2"/>
+            </row>
+            <row>
+               <label value="User Auth:"/>
+               <hbox flex="1">
+                  <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><button id="google-login" label="Google Login" oncommand="App.showGoogleLogin()"/>
+               </hbox>
+            </row>
+            <row>
+               <label value="Settings:"/>
+               <hbox class="small-buttons">
+                  <button label="Save" tooltiptext="Save values as preferences." oncommand="App.savePreferences()"/>
+                  <button label="Import" tooltiptext="Import current stored values." oncommand="App.importValues()"/>
+                  <button label="Store" tooltiptext="Store current values for use later in browser session." oncommand="App.saveValues()"/>
+               </hbox>
+            </row>
+         </rows>
+      </grid>
+   </groupbox>
+   </vbox>
+   <groupbox>
+      <caption label="Actions"/>
+      <hbox flex="1" class="small-buttons">
+         <button label="GET" tooltiptext="HTTP GET Request" oncommand="App.getURL();"/>
+         <button label="POST" tooltiptext="HTTP POST Request" oncommand="App.postURL();"/>
+         <button label="PUT" tooltiptext="HTTP PUT Request" oncommand="App.putURL();"/>
+         <button label="DELETE" tooltiptext="HTTP DELETE Request" oncommand="App.deleteURL();"/>
+         <button label="HEAD" tooltiptext="HTTP HEAD Request" oncommand="App.headURL();"/>
+      </hbox>
+   </groupbox>
+   <!--
+   <h:div id="drop">
+   <h:p class="label">Drop Area</h:p>
+   <h:div class="drop-area"/>
+   </h:div>
+   -->
+   <groupbox flex="2">
+      <caption label="Content to Send"/>
+      <hbox>
+         <button label="Headers" tooltiptext="Sets addtional headers on the request" oncommand="App.showSetHeaders()"/>
+         <button label="Parameters" tooltiptext="Sets request parameter" oncommand="App.showSetParameters()"/>
+         <button label="Parameter Body" tooltiptext="Formulates a post body of request parameters" oncommand="App.makeParameterPost()"/>
+      </hbox>
+      <textbox id="content" multiline="true" flex="2"/>
+   </groupbox>
+
+</page>

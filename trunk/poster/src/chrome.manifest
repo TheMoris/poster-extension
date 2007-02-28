@@ -1,0 +1,7 @@
+content	poster	content/
+overlay	chrome://browser/content/browser.xul	chrome://poster/content/overlay.xul
+
+locale	poster	en-US	locale/en-US/
+
+skin	poster	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://poster/skin/overlay.css

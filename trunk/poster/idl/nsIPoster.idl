@@ -1,0 +1,8 @@
+#include "nsISupports.idl"
+[scriptable, uuid(bd0c9c72-7c66-4728-a59e-b0e95ca2be5f)]
+interface nsIPoster : nsISupports
+{
+    attribute string url;
+    attribute string file;
+    attribute string contentType;
+};

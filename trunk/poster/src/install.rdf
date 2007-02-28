@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <RDF:Description RDF:about="urn:mozilla:install-manifest">
+  
+    <em:id>{d48a39ba-8f80-4fce-8ee1-bc710561c55d}</em:id>
+    <em:name>Poster</em:name>
+    <em:version>1.4.0</em:version>
+    <em:description>A developer tool for interacting with URLs</em:description>
+    <em:creator>Alex Milowski</em:creator>
+    <em:homepageURL>http://www.milowski.com/software/poster</em:homepageURL>
+    <em:aboutURL>chrome://poster/content/about.xul</em:aboutURL>
+
+    <!-- firefox -->
+    <em:targetApplication>
+       <RDF:Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                    em:minVersion="1.5"
+                    em:maxVersion="2.0.0.*" />
+    </em:targetApplication>
+    <!-- flock -->
+    <em:targetApplication>
+       <RDF:Description em:id="{a463f10c-3994-11da-9945-000d60ca027b}"
+                     em:minVersion="0.1"
+                     em:maxVersion="1.0" />
+    </em:targetApplication>
+
+  </RDF:Description>
+
+</RDF:RDF>
