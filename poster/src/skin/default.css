@@ -1,3 +1,9 @@
+#poster-window {
+   min-width: 400px;
+   width: 500px;
+   height: 600px;
+}
+
 #sidebar {
    max-width: none !important;
 }

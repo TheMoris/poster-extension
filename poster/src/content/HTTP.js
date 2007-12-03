@@ -53,27 +53,49 @@ function HTTP(method,url,options)
    if (!options.synchronizedRequest) {
 
       requester.onreadystatechange = function() {
-         if (requester.readyState==4) {
-            if (timeout) {
-               clearTimeout(timeout);
-            }
-            if (requester.status==0 || (requester.status>=200 && requester.status<300)) {
-               options.onSuccess(
-                  requester.status,
-                  requester.responseXML,
-                  requester.responseText,
-                  options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
-               );
-            } else {
-               if (options.onFailure) {
-                  options.onFailure(
+         switch (requester.readyState) {
+            case 0:
+               if (options.onUnsent) {
+                  options.onUnsent(requester);
+               }
+            break;
+            case 1:
+               if (options.onOpened) {
+                  options.onOpened(requester);
+               }
+            break;
+            case 2:
+               if (options.onHeaders) {
+                  options.onHeaders(requester);
+               }
+            break;
+            case 3:
+               if (options.onLoading) {
+                  options.onLoading(requester);
+               }
+            break;
+            case 4:
+               if (timeout) {
+                  clearTimeout(timeout);
+               }
+               if (requester.status==0 || (requester.status>=200 && requester.status<300)) {
+                  options.onSuccess(
                      requester.status,
                      requester.responseXML,
                      requester.responseText,
                      options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
                   );
+               } else {
+                  if (options.onFailure) {
+                     options.onFailure(
+                        requester.status,
+                        requester.responseXML,
+                        requester.responseText,
+                        options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
+                     );
+                  }
                }
-            }
+            break;
          }
       }
    }

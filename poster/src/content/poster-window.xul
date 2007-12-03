@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
 <?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
-<page id="posterSidebar" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
-   title="Poster Sidebar"
+<page id="poster-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Poster"
    xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="App.init()">
 
    <script type="application/x-javascript" src="chrome://poster/content/poster.js"/>
@@ -10,7 +10,7 @@
    <vbox>
    <groupbox flex="2">
       <caption label="Request"/>
-      <description>Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
+      <description flex="3">Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
       use the GET, HEAD, or DELETE methods on a URL.</description>
       <grid flex="2">
          <columns>

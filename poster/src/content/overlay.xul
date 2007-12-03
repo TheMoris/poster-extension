@@ -25,5 +25,12 @@
       oncommand="toggleSidebar('viewPosterSidebar');"/>
   </broadcasterset>
 
+  <statusbar id="status-bar">
+    <statusbarpanel id="poster-status-bar" class="poster-status-bar"
+                    context="poster-status-manage"
+                    onmousedown=";">
+      <toolbarbutton image="chrome://poster/skin/status-icon-16x16.png" tooltiptext="Open Poster" oncommand="showPoster();"/>
+    </statusbarpanel>
+  </statusbar>
 
 </overlay>
