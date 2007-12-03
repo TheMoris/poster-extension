@@ -18,7 +18,7 @@
       Comments, issues, suggestions?  Please contact me at alexml@milowski.org!  
    </description>
 </groupbox>
-<description class="ident">&#xa9; 2006 Alex Milowski &lt;alexml@milowski.org></description>
+<description class="ident">&#xa9; 2007 Alex Milowski &lt;alexml@milowski.org></description>
    <hbox>
       <spacer flex="1"/>
       <button label="Close" oncommand="window.close();"/>

@@ -191,6 +191,10 @@ var App = {
    
    onResult: function(status,xml,text,headers) {
       this.inprogress = null;
+      if (this.progressDialog) {
+         this.progressDialog.close();
+         this.progressDialog = null;
+      }
       var title = this.synopsis;
       var resultWindow = window.openDialog(
          'chrome://poster/content/response.xul','response'+(new Date()).getTime(),'centerscreen,chrome,resizable',
@@ -278,6 +282,27 @@ var App = {
               username: username,
               password: password,
               returnHeaders: true,
+              onOpened: function(request) {
+                 if (!currentApp.progressDialog) {
+                     currentApp.progressDialog = window.openDialog(
+                        'chrome://poster/content/progress.xul','progress'+(new Date()).getTime(),'centerscreen,chrome,resizable',
+                        {
+                           url: urlstr,
+                           status: "Sending...",
+                           app: currentApp
+                        }
+                     );
+                     currentApp.progressDialog.focus();
+                     currentApp.receivingCount = 0;
+                 }
+              },
+              onHeaders: function(request) {
+                 currentApp.progressDialog.document.getElementById('status').value = 'Headers loaded...';
+              },
+              onLoading: function(request) {
+                 currentApp.receivingCount++;
+                 currentApp.progressDialog.document.getElementById('status').value = '('+currentApp.receivingCount+') Receiving...';
+              },
               onSuccess: function(status,xml,text,headers) {
                  currentApp.onResult(status,xml,text,headers);
               },
@@ -309,6 +334,27 @@ var App = {
               password: password,
               headers: currentApp.requestHeaders,
               returnHeaders: true,
+              onOpened: function(request) {
+                 if (!currentApp.progressDialog) {
+                     currentApp.progressDialog = window.openDialog(
+                        'chrome://poster/content/progress.xul','progress'+(new Date()).getTime(),'centerscreen,chrome,resizable',
+                        {
+                           url: urlstr,
+                           status: "Sending...",
+                           app: currentApp
+                        }
+                     );
+                     currentApp.progressDialog.focus();
+                     currentApp.receivingCount = 0;
+                 }
+              },
+              onHeaders: function(request) {
+                 currentApp.progressDialog.document.getElementById('status').value = 'Headers loaded...';
+              },
+              onLoading: function(request) {
+                 currentApp.receivingCount++;
+                 currentApp.progressDialog.document.getElementById('status').value = '('+currentApp.receivingCount+') Receiving...';
+              },
               onSuccess: function(status,xml,text,headers) {
                  currentApp.onResult(status,xml,text,headers);
               },
