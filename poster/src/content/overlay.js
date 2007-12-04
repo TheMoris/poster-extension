@@ -1,5 +1,5 @@
 function showPoster() {
    window.openDialog(
-      'chrome://poster/content/poster-window.xul','poster','centerscreen,chrome,resizable'
+      'chrome://poster/content/poster-window.xul','poster-'+(new Date()).getTime(),'centerscreen,chrome,resizable'
    );
 }
