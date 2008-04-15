@@ -118,6 +118,13 @@ var App = {
       this.servive = data.service;
    },
    
+   showEncoder: function() {
+      var currentApp = this;
+      window.openDialog(
+         'chrome://poster/content/encoder.xul','encoder','centerscreen,chrome,resizable'
+      );
+   },
+   
    postURL: function() {
       this.handleSend("POST");
    },
@@ -136,6 +143,19 @@ var App = {
    
    headURL: function() {
       this.handleGet("HEAD");
+   },
+   
+   optionsURL: function() {
+      this.handleGet("OPTIONS");
+   },
+   propfindURL: function() {
+      this.handleSend("PROPFIND");
+   },
+   copyURL: function() {
+      this.handleGet("COPY");
+   },
+   moveURL: function() {
+      this.handleGet("MOVE");
    },
    
    handleSend: function(method) {

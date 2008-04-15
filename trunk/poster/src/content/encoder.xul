@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<window id="encode" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        title="Encode"
+        xmlns:h="http://www.w3.org/1999/xhtml" flex="1">
+   <script type="application/x-javascript" src="chrome://poster/content/Base64.js"/>
+   <script type="application/x-javascript">
+      function doEncode() {
+         var encoder = new Base64();
+         var value = encoder.encode(document.getElementById('value').value);
+         document.getElementById('result').value = value;
+      }
+   </script>
+   <grid flex="2">
+      <columns>
+         <column/>
+         <column flex="1"/>
+      </columns>
+      <rows>
+         <row>
+            <label value="Value:"/>
+            <hbox flex="1">
+               <textbox id='value' flex="1"/>
+            </hbox>
+         </row>
+         <row>
+            <label value="Result:"/>
+            <hbox flex="1">
+               <textbox id='result' flex="2" multiline='true'/>
+            </hbox>
+         </row>
+      </rows>
+   </grid>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Base64" oncommand="doEncode()"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+
+</window>
