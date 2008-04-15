@@ -60,6 +60,12 @@
          <button label="DELETE" tooltiptext="HTTP DELETE Request" oncommand="App.deleteURL();"/>
          <button label="HEAD" tooltiptext="HTTP HEAD Request" oncommand="App.headURL();"/>
       </hbox>
+      <hbox flex="1" class="small-buttons">
+         <button label="OPTIONS" tooltiptext="HTTP OPTIONS Request" oncommand="App.optionsURL();"/>
+         <button label="PROPFIND" tooltiptext="WEBDAV PROPFIND Request" oncommand="App.propfindURL();"/>
+         <button label="COPY" tooltiptext="COPY Request" oncommand="App.copyURL();"/>
+         <button label="MOVE" tooltiptext="MOVE Request" oncommand="App.moveURL();"/>
+      </hbox>
    </groupbox>
    <!--
    <h:div id="drop">
@@ -73,6 +79,7 @@
          <button label="Headers" tooltiptext="Sets addtional headers on the request" oncommand="App.showSetHeaders()"/>
          <button label="Parameters" tooltiptext="Sets request parameter" oncommand="App.showSetParameters()"/>
          <button label="Parameter Body" tooltiptext="Formulates a post body of request parameters" oncommand="App.makeParameterPost()"/>
+         <button label="Encode" tooltiptext="Encodes text for request values (e.g. Base64)" oncommand="App.showEncoder()"/>
       </hbox>
       <textbox id="content" multiline="true" flex="2"/>
    </groupbox>
