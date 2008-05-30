@@ -53,34 +53,44 @@
    </vbox>
    <groupbox>
       <caption label="Actions"/>
-      <hbox flex="1" class="small-buttons">
-         <button label="GET" tooltiptext="HTTP GET Request" oncommand="App.getURL();"/>
-         <button label="POST" tooltiptext="HTTP POST Request" oncommand="App.postURL();"/>
-         <button label="PUT" tooltiptext="HTTP PUT Request" oncommand="App.putURL();"/>
-         <button label="DELETE" tooltiptext="HTTP DELETE Request" oncommand="App.deleteURL();"/>
-         <button label="HEAD" tooltiptext="HTTP HEAD Request" oncommand="App.headURL();"/>
-      </hbox>
-      <hbox flex="1" class="small-buttons">
-         <button label="OPTIONS" tooltiptext="HTTP OPTIONS Request" oncommand="App.optionsURL();"/>
-         <button label="PROPFIND" tooltiptext="WEBDAV PROPFIND Request" oncommand="App.propfindURL();"/>
-         <button label="COPY" tooltiptext="COPY Request" oncommand="App.copyURL();"/>
-         <button label="MOVE" tooltiptext="MOVE Request" oncommand="App.moveURL();"/>
-      </hbox>
+      <grid>
+         <columns>
+            <column flex="1"/>
+            <column/>
+         </columns>
+         <rows>
+            <row class="small-buttons">
+               <menulist id="method">
+                  <menupopup>
+                     <menuitem label="GET" selected="true" value="GET"/>
+                     <menuitem label="POST" value="POST"/>
+                     <menuitem label="PUT" value="PUT"/>
+                     <menuitem label="DELETE" value="DELETE"/>
+                     <menuitem label="HEAD" value="HEAD"/>
+                     <menuitem label="OPTIONS" value="OPTIONS"/>
+                     <menuitem label="PROFIND" value="PROPFIND"/>
+                     <menuitem label="COPY" value="COPY"/>
+                     <menuitem label="MOVE" value="MOVE"/>
+                  </menupopup>
+               </menulist>
+               <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doMethodRequest();"/>
+            </row>
+            <row class="small-buttons">
+               <menulist id="content-options">
+                  <menupopup>
+                     <menuitem label="Headers" selected="true" value="headers"/>
+                     <menuitem label="Parameters" value="parameters"/>
+                     <menuitem label="Parameter Body" value="parameter-body"/>
+                     <menuitem label="Encode" value="encode"/>
+                  </menupopup>
+               </menulist>
+               <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doContent();"/>
+            </row>
+         </rows>
+      </grid>
    </groupbox>
-   <!--
-   <h:div id="drop">
-   <h:p class="label">Drop Area</h:p>
-   <h:div class="drop-area"/>
-   </h:div>
-   -->
    <groupbox flex="2">
       <caption label="Content to Send"/>
-      <hbox>
-         <button label="Headers" tooltiptext="Sets addtional headers on the request" oncommand="App.showSetHeaders()"/>
-         <button label="Parameters" tooltiptext="Sets request parameter" oncommand="App.showSetParameters()"/>
-         <button label="Parameter Body" tooltiptext="Formulates a post body of request parameters" oncommand="App.makeParameterPost()"/>
-         <button label="Encode" tooltiptext="Encodes text for request values (e.g. Base64)" oncommand="App.showEncoder()"/>
-      </hbox>
       <textbox id="content" multiline="true" flex="2"/>
    </groupbox>
 
