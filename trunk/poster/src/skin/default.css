@@ -2,6 +2,11 @@
    min-width: 400px;
    width: 500px;
    height: 600px;
+   overflow: auto;
+}
+
+#posterSidebar {
+   overflow: auto;
 }
 
 #sidebar {

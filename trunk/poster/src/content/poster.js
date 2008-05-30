@@ -125,6 +125,43 @@ var App = {
       );
    },
    
+   doMethodRequest: function() {
+      var method = document.getElementById("method").value;
+      if (method=="GET") {
+         this.getURL();
+      } else if (method=="POST") {
+         this.postURL();
+      } else if (method=="PUT") {
+         this.postURL();
+      } else if (method=="DELETE") {
+         this.deleteURL();
+      } else if (method=="HEAD") {
+         this.headURL();
+      } else if (method=="OPTIONS") {
+         this.optionsURL();
+      } else if (method=="PROPFIND") {
+         this.propfindURL();
+      } else if (method=="COPY") {
+         this.copyURL();
+      } else if (method=="MOVE") {
+         this.moveURL();
+      }
+   },
+   
+   doContent: function() {
+      var value = document.getElementById("content-options").value;
+      if (value=="headers") {
+         this.showSetHeaders();
+      } else if (value=="parameters") {
+         this.showSetParameters();
+      } else if (value=="parameter-body") {
+         this.makeParameterPost();
+      } else if (value=="encode") {
+         this.showEncoder();
+      }
+      
+   },
+   
    postURL: function() {
       this.handleSend("POST");
    },
