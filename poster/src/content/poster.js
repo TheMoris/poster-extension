@@ -132,7 +132,7 @@ var App = {
       } else if (method=="POST") {
          this.postURL();
       } else if (method=="PUT") {
-         this.postURL();
+         this.putURL();
       } else if (method=="DELETE") {
          this.deleteURL();
       } else if (method=="HEAD") {

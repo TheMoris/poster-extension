@@ -1,1 +1,10 @@
 /* This is just an example. You shouldn't do this. */
+#poster-status-bar {
+   padding: 0px;
+   margin: 0px;
+}
+
+#poster-status-bar toolbarbutton {
+   padding: 0px;
+   margin: 0px;
+}
