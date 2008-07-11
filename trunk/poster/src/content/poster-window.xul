@@ -53,13 +53,21 @@
    </vbox>
    <groupbox>
       <caption label="Actions"/>
+      <hbox class="small-buttons">
+      <button label="GET" tooltiptext="GET Request" oncommand="App.getURL();"/>
+      <button label="POST" tooltiptext="POSt Request" oncommand="App.postURL();"/>
+      <button label="PUT" tooltiptext="PUT Request" oncommand="App.putURL();"/>
+      <button label="DELETE" tooltiptext="DELETE Request" oncommand="App.deleteURL();"/>
+      </hbox>
       <grid>
          <columns>
-            <column flex="1"/>
+            <column/>
+            <column  flex="1"/>
             <column/>
          </columns>
          <rows>
             <row class="small-buttons">
+               <label value="Methods:"/>
                <menulist id="method">
                   <menupopup>
                      <menuitem label="GET" selected="true" value="GET"/>
@@ -76,6 +84,7 @@
                <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doMethodRequest();"/>
             </row>
             <row class="small-buttons">
+               <label value="Options:"/>
                <menulist id="content-options">
                   <menupopup>
                      <menuitem label="Headers" selected="true" value="headers"/>

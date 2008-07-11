@@ -6,7 +6,7 @@
   
     <em:id>{d48a39ba-8f80-4fce-8ee1-bc710561c55d}</em:id>
     <em:name>Poster</em:name>
-    <em:version>1.7.1</em:version>
+    <em:version>1.7.2</em:version>
     <em:description>A developer tool for interacting with URLs</em:description>
     <em:creator>Alex Milowski</em:creator>
     <em:homepageURL>http://code.google.com/p/poster-extension/</em:homepageURL>
