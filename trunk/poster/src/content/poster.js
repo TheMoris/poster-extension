@@ -481,7 +481,7 @@ var App = {
         if (body.length>0) {
            body += "&";
         }
-        body += name+"="+escape(this.parameters[name])
+        body += name+"="+encodeURIComponent(this.parameters[name])
      }
      this.elements["content"].value = body;
   },
