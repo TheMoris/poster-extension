@@ -83,7 +83,8 @@ function HTTP(method,url,options)
                      requester.status,
                      requester.responseXML,
                      requester.responseText,
-                     options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
+                     options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null,
+                     requester.statusText
                   );
                } else {
                   if (options.onFailure) {
@@ -91,7 +92,8 @@ function HTTP(method,url,options)
                         requester.status,
                         requester.responseXML,
                         requester.responseText,
-                        options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
+                        options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null,
+                        requester.statusText
                      );
                   }
                }
@@ -134,7 +136,8 @@ function HTTP(method,url,options)
             requester.status,
             requester.responseXML,
             requester.responseText,
-            options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
+            options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null,
+            requester.statusText
          );
       } else {
          if (options.onFailure) {
@@ -142,7 +145,8 @@ function HTTP(method,url,options)
                requester.status,
                requester.responseXML,
                requester.responseText,
-               options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null
+               options.returnHeaders ? _HTTP_parseHeaders(requester.getAllResponseHeaders()) : null,
+               requester.statusText
             );
          }
       }

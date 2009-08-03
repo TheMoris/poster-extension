@@ -1,12 +1,12 @@
 #poster-window {
-   min-width: 400px;
-   width: 500px;
-   height: 600px;
+   min-width: 450px;
+   width: 550px;
+   height: 700px;
    overflow: auto;
 }
 
 #posterSidebar {
-   overflow: auto;
+   overflow: scroll;
 }
 
 #sidebar {
@@ -56,4 +56,9 @@ div.drop-area {
    min-height: 250px;
    min-width: 300px;
    width: 300px;
+}
+
+#response #title {
+   padding: 0.2em;
+   padding-left: 0.5em;
 }
