@@ -27,6 +27,20 @@
   </broadcasterset>
 -->
 
+  <keyset id="mainKeyset">
+    <key id="key_openPoster" command="poster:open"
+         key="P"
+         modifiers="accel,alt" />
+  </keyset>
+
+  <commandset id="mainCommandSet">
+     <command id="poster:open" oncommand="showPoster();"/>
+  </commandset>
+
+  <menupopup id="menu_ToolsPopup">
+      <menuitem label="Poster" key="key_openPoster" accesskey="p" command="poster:open"/>
+  </menupopup>
+
   <statusbar id="status-bar">
     <statusbarpanel id="poster-status-bar" class="poster-status-bar"
                     context="poster-status-manage"
