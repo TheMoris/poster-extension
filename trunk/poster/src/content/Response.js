@@ -2,7 +2,7 @@ var Response = {
    init: function(data) {
       var titleE = document.getElementById("title");
       titleE.appendChild(document.createTextNode(data.title));
-      this.setResponseStatus(data.status);
+      this.setResponseStatus(data.status+" "+data.statusText);
       this.setResponseContent(data.content);
       for (var name in data.headers) {
          this.addResponseHeader(name,data.headers[name]);

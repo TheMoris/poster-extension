@@ -272,7 +272,7 @@ var App = {
       return file;
    },
    
-   onResult: function(status,xml,text,headers) {
+   onResult: function(status,xml,text,headers,statusText) {
       this.inprogress = null;
       if (this.progressDialog) {
          this.progressDialog.close();
@@ -284,6 +284,7 @@ var App = {
          {
             title: title,
             status: status,
+            statusText: statusText,
             content: text,
             headers: headers
          }
@@ -322,13 +323,13 @@ var App = {
                username: username,
                password: password,
                returnHeaders: true,
-               onSuccess: function(status,xml,text,headers) {
+               onSuccess: function(status,xml,text,headers,statusText) {
                   fstream.close();
-                  currentApp.onResult(status,xml,text,headers);
+                  currentApp.onResult(status,xml,text,headers,statusText);
                },
-               onFailure: function(status,xml,text,headers) {
+               onFailure: function(status,xml,text,headers,statusText) {
                   fstream.close();
-                  currentApp.onResult(status,xml,text,headers);
+                  currentApp.onResult(status,xml,text,headers,statusText);
                }
             }
          );
@@ -390,11 +391,11 @@ var App = {
                  currentApp.receivingCount++;
                  currentApp.progressDialog.document.getElementById('status').value = '('+currentApp.receivingCount+') Receiving...';
               },
-              onSuccess: function(status,xml,text,headers) {
-                 currentApp.onResult(status,xml,text,headers);
+              onSuccess: function(status,xml,text,headers,statusText) {
+                 currentApp.onResult(status,xml,text,headers,statusText);
               },
-              onFailure: function(status,xml,text,headers) {
-                 currentApp.onResult(status,xml,text,headers);
+              onFailure: function(status,xml,text,headers,statusText) {
+                 currentApp.onResult(status,xml,text,headers,statusText);
               }
            }
         );
@@ -444,11 +445,11 @@ var App = {
                  currentApp.receivingCount++;
                  currentApp.progressDialog.document.getElementById('status').value = '('+currentApp.receivingCount+') Receiving...';
               },
-              onSuccess: function(status,xml,text,headers) {
-                 currentApp.onResult(status,xml,text,headers);
+              onSuccess: function(status,xml,text,headers,statusText) {
+                 currentApp.onResult(status,xml,text,headers,statusText);
               },
-              onFailure: function(status,xml,text,headers) {
-                 currentApp.onResult(status,xml,text,headers);
+              onFailure: function(status,xml,text,headers,statusText) {
+                 currentApp.onResult(status,xml,text,headers,statusText);
               }
            }
         );
