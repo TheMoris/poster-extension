@@ -1,3 +1,4 @@
+var XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
 var posterService = Components.classes["@milowski.com/url_poster;1"].getService(Components.interfaces.nsIPoster).wrappedJSObject;
 var mimeService = Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService);
@@ -45,6 +46,8 @@ var App = {
       this.elements["password"] = document.getElementById("password");
       this.elements["content"] = document.getElementById("content");
       this.elements["url"] = document.getElementById("url");
+      this.elements["timeout-slider"] = document.getElementById("timeout-slider");
+      this.elements["timeout"] = document.getElementById("timeout");
       
       this.elements["filename"].value = posterService.file;
       this.elements["contentType"].value = posterService.contentType;
@@ -55,6 +58,27 @@ var App = {
       if (posterService.password) {
          this.elements["password"].value = posterService.password;
       }
+      var current = this;
+      this.elements["timeout-slider"].onchange = function() {
+         current.elements["timeout"].value = current.elements["timeout-slider"].value;
+      }
+      document.getElementById("base64-encode").onclick = function() {
+         var value = current.elements["content"].value;
+         if (value.length>0) {
+            var encoder = new Base64();
+            current.elements["content"].value = encoder.encode(value);
+         }
+      }
+      document.getElementById("header-list").onkeypress = function(event) {
+         if (event.keyCode==8 || event.keyCode==46){
+            current.onDeleteHeader();
+         }
+      };
+      document.getElementById("parameter-list").onkeypress = function(event) {
+         if (event.keyCode==8 || event.keyCode==46){
+            current.onDeleteParameter();
+         }
+      };
    },
    
    saveValues: function() {
@@ -273,6 +297,7 @@ var App = {
             requestToCancel.abort();
          }
          var currentApp = this;
+         var timeout = parseInt(this.elements["timeout-slider"].value)*1000;
          var username = this.elements["username"].value;
          var password = this.elements["password"].value;
          var file = this.pathToFile(fpath);
@@ -288,6 +313,7 @@ var App = {
             method,
             urlstr, 
             {
+               timeout: timeout,
                contentType: ctype,
                body: bufferedStream,
                headers: currentApp.requestHeaders,
@@ -327,12 +353,14 @@ var App = {
            requestToCancel.abort();
         }
         var currentApp = this;
+        var timeout = parseInt(this.elements["timeout-slider"].value)*1000;
         var username = this.elements["username"].value;
         var password = this.elements["password"].value;
         this.inprogress = HTTP(
            method,
            urlstr, 
            {
+              timeout: timeout,
               contentType: ctype,
               body: content,
               headers: currentApp.requestHeaders,
@@ -381,12 +409,14 @@ var App = {
            requestToCancel.abort();
         }
         var currentApp = this;
+        var timeout = parseInt(this.elements["timeout-slider"].value)*1000;
         var username = this.elements["username"].value;
         var password = this.elements["password"].value;
         this.inprogress = HTTP(
            method,
            urlstr, 
            {
+              timeout: timeout,
               username: username,
               password: password,
               headers: currentApp.requestHeaders,
@@ -454,6 +484,120 @@ var App = {
         body += name+"="+escape(this.parameters[name])
      }
      this.elements["content"].value = body;
-  }
+  },
+   onAddChangeHeader: function() {
+      var name = document.getElementById("header-name").value;
+      if (!name) {
+         return;
+      }
+      var value = document.getElementById("header-value").value;
+      this.requestHeaders[name] = value;
+      this.addRequestHeader(name,value);
+   },
+   addRequestHeader: function(name,value) {
+      try {
+      var list = document.getElementById("header-list");
+      var len = list.getRowCount();
+      var item = null;
+      for (var i=0; i<len; i++) {
+         item = list.getItemAtIndex(i);
+         var nameCell = item.getElementsByTagName('listcell').item(0);
+         if (nameCell.getAttribute('label')==name) {
+            break;
+         }
+         item = null;
+      }
+      if (!item) {
+         item = document.createElementNS(XUL_NS,"listitem");
+         var nameCell = document.createElementNS(XUL_NS,"listcell");
+         nameCell.setAttribute("label",name);
+         var valueCell = document.createElementNS(XUL_NS,"listcell");
+         valueCell.setAttribute("label",value);
+         item.appendChild(nameCell);
+         item.appendChild(valueCell);
+         list.appendChild(item);
+      } else {
+         var cells = item.getElementsByTagName('listcell');
+         var nameCell = cells.item(0);
+         var valueCell = cells.item(1);
+         nameCell.setAttribute("label",name);
+         valueCell.setAttribute("label",value);
+      }
+      } catch (ex) {
+         alert(ex);
+      }
+   },
+   onDeleteHeader: function() {
+      try {
+         var list = document.getElementById("header-list");
+         var item = list.getSelectedItem(0);
+         while (item) {
+            var cells = item.getElementsByTagName('listcell');
+            var nameCell = cells.item(0);
+            delete this.requestHeaders[nameCell.getAttribute("label")];
+            list.removeItemAt(list.getIndexOfItem(item));
+            item = list.getSelectedItem(0);
+         }
+      } catch (ex) {
+         alert(ex);
+      }
+   },
+   onAddChangeParameter: function() {
+      var name = document.getElementById("parameter-name").value;
+      if (!name) {
+         return;
+      }
+      var value = document.getElementById("parameter-value").value;
+      this.parameters[name] = value;
+      this.addParameter(name,value);
+   },
+   addParameter: function(name,value) {
+      try {
+      var list = document.getElementById("parameter-list");
+      var len = list.getRowCount();
+      var item = null;
+      for (var i=0; i<len; i++) {
+         item = list.getItemAtIndex(i);
+         var nameCell = item.getElementsByTagName('listcell').item(0);
+         if (nameCell.getAttribute('label')==name) {
+            break;
+         }
+         item = null;
+      }
+      if (!item) {
+         item = document.createElementNS(XUL_NS,"listitem");
+         var nameCell = document.createElementNS(XUL_NS,"listcell");
+         nameCell.setAttribute("label",name);
+         var valueCell = document.createElementNS(XUL_NS,"listcell");
+         valueCell.setAttribute("label",value);
+         item.appendChild(nameCell);
+         item.appendChild(valueCell);
+         list.appendChild(item);
+      } else {
+         var cells = item.getElementsByTagName('listcell');
+         var nameCell = cells.item(0);
+         var valueCell = cells.item(1);
+         nameCell.setAttribute("label",name);
+         valueCell.setAttribute("label",value);
+      }
+      } catch (ex) {
+         alert(ex);
+      }
+   },
+   onDeleteParameter: function() {
+      try {
+         var list = document.getElementById("parameter-list");
+         var item = list.getSelectedItem(0);
+         while (item) {
+            var cells = item.getElementsByTagName('listcell');
+            var nameCell = cells.item(0);
+            delete this.parameters[nameCell.getAttribute("label")];
+            list.removeItemAt(list.getIndexOfItem(item));
+            item = list.getSelectedItem(0);
+         }
+      } catch (ex) {
+         alert(ex);
+      }
+   }
 }
 

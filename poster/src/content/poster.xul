@@ -7,10 +7,11 @@
 
    <script type="application/x-javascript" src="chrome://poster/content/poster.js"/>
    <script type="application/x-javascript" src="chrome://poster/content/HTTP.js"/> 
+   <script type="application/x-javascript" src="chrome://poster/content/Base64.js"/>
    <vbox>
    <groupbox flex="2">
       <caption label="Request"/>
-      <description>Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
+      <description flex="1">Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
       use the GET, HEAD, or DELETE methods on a URL.</description>
       <grid flex="2">
          <columns>
@@ -23,20 +24,15 @@
                <textbox id="url" flex="2"/>
             </row>
             <row>
-               <label value="File:"/>
-               <hbox flex="1">
-                  <textbox id="filename" flex="2"/>
-                  <button id="browse-file" label="Browse..." tooltiptext="Browse for file." oncommand="App.browseForFile()"/>
-               </hbox>
-            </row>
-            <row>
-               <label value="Content Type:"/>
-               <textbox id="ctype" flex="2"/>
-            </row>
-            <row>
                <label value="User Auth:"/>
                <hbox flex="1">
                   <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><button id="google-login" label="Google Login" oncommand="App.showGoogleLogin()"/>
+               </hbox>
+            </row>
+            <row>
+               <label value="Timeout:"/>
+               <hbox flex="1">
+                  <scale id='timeout-slider' min="1" max="360" value="30" flex="2"/><textbox id='timeout' value="30" size="5" flex="1"/><label value="seconds"/>
                </hbox>
             </row>
             <row>
@@ -52,13 +48,25 @@
    </groupbox>
    <groupbox flex="2">
       <caption label="Actions"/>
-      <hbox class="small-buttons">
+      <hbox class="small-buttons" flex="1">
       <button label="GET" tooltiptext="GET Request" oncommand="App.getURL();"/>
       <button label="POST" tooltiptext="POSt Request" oncommand="App.postURL();"/>
-      <button label="PUT" tooltiptext="PUT Request" oncommand="App.putURL();"/>
-      <button label="DELETE" tooltiptext="DELETE Request" oncommand="App.deleteURL();"/>
+      <menulist id="method">
+         <menupopup>
+            <menuitem label="GET" value="GET"/>
+            <menuitem label="POST" value="POST"/>
+            <menuitem label="PUT" value="PUT"/>
+            <menuitem label="DELETE" selected="true" value="DELETE"/>
+            <menuitem label="HEAD" value="HEAD"/>
+            <menuitem label="OPTIONS" value="OPTIONS"/>
+            <menuitem label="PROFIND" value="PROPFIND"/>
+            <menuitem label="COPY" value="COPY"/>
+            <menuitem label="MOVE" value="MOVE"/>
+         </menupopup>
+      </menulist>
+      <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doMethodRequest();"/>
       </hbox>
-      <grid>
+      <grid flex="1">
          <columns>
             <column/>
             <column  flex="1"/>
@@ -66,30 +74,12 @@
          </columns>
          <rows>
             <row class="small-buttons">
-               <label value="Method:"/>
-               <menulist id="method">
-                  <menupopup>
-                     <menuitem label="GET" selected="true" value="GET"/>
-                     <menuitem label="POST" value="POST"/>
-                     <menuitem label="PUT" value="PUT"/>
-                     <menuitem label="DELETE" value="DELETE"/>
-                     <menuitem label="HEAD" value="HEAD"/>
-                     <menuitem label="OPTIONS" value="OPTIONS"/>
-                     <menuitem label="PROFIND" value="PROPFIND"/>
-                     <menuitem label="COPY" value="COPY"/>
-                     <menuitem label="MOVE" value="MOVE"/>
-                  </menupopup>
-               </menulist>
-               <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doMethodRequest();"/>
-            </row>
-            <row class="small-buttons">
                <label value="Options:"/>
                <menulist id="content-options">
                   <menupopup>
                      <menuitem label="Headers" selected="true" value="headers"/>
                      <menuitem label="Parameters" value="parameters"/>
                      <menuitem label="Parameter Body" value="parameter-body"/>
-                     <menuitem label="Encode" value="encode"/>
                   </menupopup>
                </menulist>
                <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doContent();"/>
@@ -100,6 +90,25 @@
    </vbox>
    <groupbox flex="2">
       <caption label="Content to Send"/>
+       <grid>
+         <columns>
+            <column/>
+            <column flex="1"/>
+         </columns>
+         <rows>
+            <row>
+                <label value="File:"/>
+                <hbox>
+                   <textbox id="filename" flex="2"/>
+                   <button id="browse-file" label="Browse..." tooltiptext="Browse for file." oncommand="App.browseForFile()"/>
+                </hbox>
+            </row>
+            <row>
+               <label value="Content Type:"/>
+               <hbox><textbox id="ctype" flex="2"/><button id='base64-encode' label="Base64"/></hbox>
+            </row>
+           </rows>
+       </grid>
       <textbox id="content" multiline="true" flex="2"/>
    </groupbox>
 
