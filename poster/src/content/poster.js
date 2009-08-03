@@ -256,7 +256,7 @@ var App = {
                   urlstr += "?";
                }
             }
-            urlstr += name+"="+escape(this.parameters[name]);
+            urlstr += name+"="+encodeURIComponent(this.parameters[name]);
             needSeparator = true;
          }
          this.synopsis = method+" on "+urlstr;
