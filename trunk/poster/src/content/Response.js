@@ -12,7 +12,7 @@ var Response = {
       document.getElementById("code").value = status;
    },
    setResponseContent: function(content) {
-      document.getElementById("content").value = content;
+      document.getElementById("content").value = content ? content : "";
    },
    addResponseHeader: function(name,value) {
       var grid = document.getElementById("headers");
