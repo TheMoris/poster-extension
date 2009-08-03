@@ -15,10 +15,10 @@
 <groupbox>
    <caption label="Feedback"/>
    <description>
-      Comments, issues, suggestions?  Please contact me at alexml@milowski.org!  
+      Comments, issues, suggestions?  Please visit: http://code.google.com/p/poster-extension/
    </description>
 </groupbox>
-<description class="ident">&#xa9; 2007 Alex Milowski &lt;alexml@milowski.org></description>
+<hbox><spacer flex="1"/><description class="ident">&#xa9; 2007 Alex Milowski &lt;alexml@milowski.org></description><spacer flex="1"/></hbox>
    <hbox>
       <spacer flex="1"/>
       <button label="Close" oncommand="window.close();"/>
