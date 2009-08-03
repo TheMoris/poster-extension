@@ -230,8 +230,10 @@ var App = {
       }
       if (urlstr.length==0) {
          alert("A URL must be specified.");
+         /*
       } else if (fpath.length==0 && content.length==0) {
          alert("Either a file or content must be specified.");
+         */
       } else if (fpath.length!=0 && content.length!=0) {
          alert("You can't have both a file and content to send.");
       } else if (fpath.length!=0) {
