@@ -67,7 +67,7 @@
             <menuitem label="MOVE" value="MOVE"/>
          </menupopup>
       </menulist>
-      <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doMethodRequest();"/>
+      <button label="Submit" tooltiptext="Send the HTTP Request" oncommand="App.doMethodRequest();"/>
       </hbox>
 <!--
       <grid>
