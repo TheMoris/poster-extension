@@ -4,6 +4,7 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="overlay.js"/>
 
+<!--
   <menupopup id="viewSidebarMenu">
     <menuitem key="key_openPosterSidebar" observes="viewPosterSidebar" />
   </menupopup>
@@ -24,6 +25,7 @@
       sidebartitle="Poster"
       oncommand="toggleSidebar('viewPosterSidebar');"/>
   </broadcasterset>
+-->
 
   <statusbar id="status-bar">
     <statusbarpanel id="poster-status-bar" class="poster-status-bar"
