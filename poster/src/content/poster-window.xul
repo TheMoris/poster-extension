@@ -54,6 +54,7 @@
       <button label="GET" tooltiptext="GET Request" oncommand="App.getURL();"/>
       <button label="POST" tooltiptext="POSt Request" oncommand="App.postURL();"/>
       <button label="PUT" tooltiptext="PUT Request" oncommand="App.putURL();"/>
+      <spacer flex="1"/>
       <menulist id="method">
          <menupopup>
             <menuitem label="GET" value="GET"/>
