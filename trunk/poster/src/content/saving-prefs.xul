@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
+<window id="save-prefs" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="Save Preferences"
+        xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="saver.init(window.arguments[0])">
+   <script type="application/x-javascript" src="chrome://poster/content/SavePrefs.js"/>
+   <script type="application/x-javascript">var saver = new SavePrefs();</script>
+   <vbox flex="2">
+      <checkbox id='url' label="URL?" checked="true"/>
+      <checkbox id='content-type' label="Content type?" checked="true"/>
+      <checkbox id='timeout' label="Timeout?" checked="true"/>
+      <checkbox id='headers' label="Headers?" checked="false"/>
+      <checkbox id='parameters' label="Parameters?" checked="false"/>
+   </vbox>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Save" oncommand="saver.onSave()"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+</window>
