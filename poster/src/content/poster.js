@@ -49,6 +49,14 @@ PosterApp.prototype.init = function() {
    if (timeoutPref) {
       this.elements["timeout"].value = timeoutPref;
    }
+   var headersPref = this.getPreferenceString("headers");
+   if (headersPref) {
+      this.setHeaders(headersPref);
+   }
+   var parametersPref = this.getPreferenceString("parameters");
+   if (parametersPref) {
+      this.setParameters(parametersPref);
+   }
 
    var current = this;
    this.elements["timeout-slider"].onchange = function() {
@@ -76,6 +84,22 @@ PosterApp.prototype.init = function() {
    };
 }
 
+PosterApp.prototype.setHeaders = function(data) {
+   var lines = data.split("\n");
+   for (var i=0; i<lines.length; i++) {
+      var header = lines[i].split(": ");
+      this.addRequestHeader(header[0],header[1]);
+   }
+}
+
+PosterApp.prototype.setParameters = function(data) {
+   var parameters = data.split("&");
+   for (var i=0; i<parameters.length; i++) {
+      var param = parameters[i].split("=");
+      this.addParameter(param[0],decodeURIComponent(param[1]));
+   }
+}
+
 PosterApp.prototype.savePreferences = function(options) {
    if (options.contentType) {
       this.setPreferenceString("contentType",this.elements["contentType"].value);
@@ -87,8 +111,32 @@ PosterApp.prototype.savePreferences = function(options) {
       this.setPreferenceString("timeout",this.elements["timeout-slider"].value);
    }
    if (options.headers) {
+      var headerStr = null;
+      for (var key in this.requestHeaders) {
+         if (headerStr) {
+            headerStr += "\n"+key+": "+this.requestHeaders[key];
+         } else {
+            headerStr = key+": "+this.requestHeaders[key];
+         }
+      }
+      if (!headerStr) {
+         headerStr = "";
+      }
+      this.setPreferenceString("headers",headerStr);
    }
    if (options.parameters) {
+      var parametersStr = null;
+      for (var key in this.parameters) {
+         if (parametersStr) {
+            parametersStr += "&"+key+"="+encodeURIComponent(this.parameters[key]);
+         } else {
+            parametersStr = key+"="+encodeURIComponent(this.parameters[key]);
+         }
+      }
+      if (!parametersStr) {
+         parametersStr = "";
+      }
+      this.setPreferenceString("parameters",parametersStr);
    }
 }
    
@@ -614,7 +662,6 @@ PosterApp.prototype.onAddChangeParameter = function() {
       return;
    }
    var value = document.getElementById("parameter-value").value;
-   this.parameters[name] = value;
    this.addParameter(name,value);
 }
 
@@ -631,6 +678,7 @@ PosterApp.prototype.onSelectParameterItem = function() {
 
 PosterApp.prototype.addParameter = function(name,value) {
    try {
+   this.parameters[name] = value;
    var list = document.getElementById("parameter-list");
    var len = list.getRowCount();
    var item = null;

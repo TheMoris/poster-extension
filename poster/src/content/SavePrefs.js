@@ -12,7 +12,7 @@ SavePrefs.prototype.onSave = function() {
       contentType: document.getElementById("content-type").checked,
       timeout: document.getElementById("timeout").checked,
       headers: document.getElementById("headers").checked,
-      paraemters: document.getElementById("parameters").checked
+      parameters: document.getElementById("parameters").checked
    }
    this.data.app.savePreferences(options)
    window.close();
