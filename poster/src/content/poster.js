@@ -298,6 +298,9 @@ PosterApp.prototype.handleSend = function(method) {
    } else if (fpath.length==0 && content.length==0) {
       alert("Either a file or content must be specified.");
       */
+   } else if (urlstr.indexOf(':')<=0) {
+      alert("You have not specified a valid URI.");
+      return;
    } else if (fpath.length!=0 && content.length!=0) {
       alert("You can't have both a file and content to send.");
    } else if (fpath.length!=0) {
@@ -313,6 +316,8 @@ PosterApp.prototype.handleGet = function(method) {
    var urlstr = this.elements["url"].value;
    if (urlstr.length==0) {
       alert("A URL must be specified.");
+   } else if (urlstr.indexOf(':')<=0) {
+      alert("You have not specified a valid URI.");
    } else {
       var needSeparator = false;
       for (var name in this.parameters) {
@@ -415,7 +420,7 @@ PosterApp.prototype.sendFileToURL = function(urlstr,method,fpath,ctype) {
       }
 
    } catch (error) {
-      alert("Cannot process request due to: "+error.message);
+      alert("Cannot process request on "+urlstr+" due to: "+error.message);
    }
 
 }
@@ -474,7 +479,7 @@ PosterApp.prototype.sendContentToURL = function(urlstr,method,content,ctype) {
         }
      );
   } catch (error) {
-     alert("Cannot process request due to: "+error.message);
+      alert("Cannot process request on "+urlstr+" due to: "+error.message);
   }
 }
 
@@ -528,7 +533,7 @@ PosterApp.prototype.getContentFromURL = function(urlstr,method) {
         }
      );
   } catch (error) {
-     alert("Cannot process request due to: "+error.message);
+      alert("Cannot process request on "+urlstr+" due to: "+error.message);
   }
 }
 
