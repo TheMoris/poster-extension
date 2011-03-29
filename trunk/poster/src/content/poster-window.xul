@@ -3,16 +3,17 @@
 <?xml-stylesheet href="chrome://poster/skin/default.css" type="text/css"?>
 <page id="poster-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
    title="Poster"
-   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="App.init()">
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="app.init()">
 
    <script type="application/x-javascript" src="chrome://poster/content/poster.js"/>
    <script type="application/x-javascript" src="chrome://poster/content/HTTP.js"/> 
    <script type="application/x-javascript" src="chrome://poster/content/Base64.js"/>
+   <script type="application/x-javascript">
+var app = new PosterApp();
+   </script>
    <vbox>
    <groupbox flex="2">
       <caption label="Request"/>
-      <description flex="3">Select a file or enter content to POST or PUT to a URL and then specify the mime type you'd like or just
-      use the GET, HEAD, or DELETE methods on a URL.</description>
       <grid flex="2">
          <columns>
             <column/>
@@ -27,21 +28,13 @@
             <row>
                <label value="User Auth:"/>
                <hbox flex="1">
-                  <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><button id="google-login" label="Google Login" oncommand="App.showGoogleLogin()"/>
+                  <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><toolbarbutton id="google-login" image="chrome://poster/skin/login.png" tooltiptext="Login to your google account via ClientLogin" oncommand="app.showGoogleLogin()"/>
                </hbox>
             </row>
             <row>
-               <label value="Timeout:"/>
+               <label value="Timeout (s):"/>
                <hbox flex="1">
-                  <scale id='timeout-slider' min="1" max="360" value="30" flex="2"/><textbox id='timeout' value="30" size="5" flex="1"/>
-               </hbox>
-            </row>
-            <row>
-               <label value="Settings:"/>
-               <hbox class="small-buttons">
-                  <button label="Save" tooltiptext="Save values as preferences." oncommand="App.savePreferences()"/>
-                  <button label="Import" tooltiptext="Import current stored values." oncommand="App.importValues()"/>
-                  <button label="Store" tooltiptext="Store current values for use later in browser session." oncommand="App.saveValues()"/>
+                  <textbox id='timeout' value="30" size="5" flex="0"/><scale id='timeout-slider' min="1" max="360" value="30" flex="2"/>
                </hbox>
             </row>
          </rows>
@@ -50,11 +43,11 @@
    </vbox>
    <groupbox>
       <caption label="Actions"/>
-      <hbox class="small-buttons">
-      <button label="GET" tooltiptext="GET Request" oncommand="App.getURL();"/>
-      <button label="POST" tooltiptext="POSt Request" oncommand="App.postURL();"/>
-      <button label="PUT" tooltiptext="PUT Request" oncommand="App.putURL();"/>
-      <spacer flex="1"/>
+      <hbox>
+      <button label="GET" tooltiptext="GET Request" oncommand="app.getURL();"/>
+      <button label="POST" tooltiptext="POSt Request" oncommand="app.postURL();"/>
+      <button label="PUT" tooltiptext="PUT Request" oncommand="app.putURL();"/>
+      <separator orient="vertical" class="groove"/>
       <menulist id="method">
          <menupopup>
             <menuitem label="GET" value="GET"/>
@@ -64,34 +57,16 @@
             <menuitem label="HEAD" value="HEAD"/>
             <menuitem label="OPTIONS" value="OPTIONS"/>
             <menuitem label="PROFIND" value="PROPFIND"/>
+            <menuitem label="MKCOL" value="MKCOL"/>
             <menuitem label="COPY" value="COPY"/>
             <menuitem label="MOVE" value="MOVE"/>
          </menupopup>
       </menulist>
-      <button label="Submit" tooltiptext="Send the HTTP Request" oncommand="App.doMethodRequest();"/>
+      <toolbarbutton image="chrome://poster/skin/submit.png" tooltiptext="Send the HTTP Request" oncommand="app.doMethodRequest();"/>
+      <separator orient="vertical" class="groove"/>
+      <spacer flex="1"/>
+      <toolbarbutton image="chrome://poster/skin/preferences.png" tooltiptext="Save displayed values as default preferences." oncommand="app.savePreferences()"/>
       </hbox>
-<!--
-      <grid>
-         <columns>
-            <column/>
-            <column  flex="1"/>
-            <column/>
-         </columns>
-         <rows>
-            <row class="small-buttons">
-               <label value="Options:"/>
-               <menulist id="content-options">
-                  <menupopup>
-                     <menuitem label="Headers" selected="true" value="headers"/>
-                     <menuitem label="Parameters" value="parameters"/>
-                     <menuitem label="Parameter Body" value="parameter-body"/>
-                  </menupopup>
-               </menulist>
-               <button label="GO" tooltiptext="Make HTTP Request" oncommand="App.doContent();"/>
-            </row>
-         </rows>
-      </grid>
--->
    </groupbox>
    <groupbox flex="2">
       <tabbox id='content-tabs' flex="2">
@@ -113,7 +88,7 @@
                       <label value="File:"/>
                       <hbox>
                          <textbox id="filename" flex="2"/>
-                         <button id="browse-file" label="Browse..." tooltiptext="Browse for file." oncommand="App.browseForFile()"/>
+                         <button id="browse-file" label="Browse..." tooltiptext="Browse for file." oncommand="app.browseForFile()"/>
                       </hbox>
                   </row>
                   <row>
@@ -122,7 +97,7 @@
                   </row>
                   <row>
                     <label value="Content Options:"/>
-                    <hbox><button id='base64-encode' label="Base64"/><button label="Parameter Body" oncommand="App.makeParameterPost()"/></hbox>
+                    <hbox><button id='base64-encode' label="Base64"/><button label="Parameter Body" oncommand="app.makeParameterPost()"/></hbox>
                   </row>
                  </rows>
              </grid>
@@ -131,9 +106,9 @@
            <vbox flex="1">
             <hbox align="center">
                <label value="Name:"/>
-               <textbox id="header-name"  flex="1"/><label value="Value:"/><textbox id="header-value" flex="2"/><button label="Add/Change" oncommand="App.onAddChangeHeader()"/>
+               <textbox id="header-name"  flex="1"/><label value="Value:"/><textbox id="header-value" flex="2"/><button label="Add/Change" oncommand="app.onAddChangeHeader()"/>
             </hbox>
-            <listbox id="header-list" seltype="multiple" onselect="App.onSelectHeaderItem()">
+            <listbox id="header-list" seltype="multiple" onselect="app.onSelectHeaderItem()">
                <listhead>
                   <listheader label="Name"/>
                   <listheader label="Value"/>
@@ -148,9 +123,9 @@
            <vbox flex="1">
             <hbox align="center">
                <label value="Name:"/>
-               <textbox id="parameter-name"  flex="1"/><label value="Value:"/><textbox id="parameter-value" flex="2"/><button label="Add/Change" oncommand="App.onAddChangeParameter()"/>
+               <textbox id="parameter-name"  flex="1"/><label value="Value:"/><textbox id="parameter-value" flex="2"/><button label="Add/Change" oncommand="app.onAddChangeParameter()"/>
             </hbox>
-            <listbox id="parameter-list" seltype="multiple" onselect="App.onSelectItemParameter()">
+            <listbox id="parameter-list" seltype="multiple" onselect="app.onSelectItemParameter()">
                <listhead>
                   <listheader label="Name"/>
                   <listheader label="Value"/>

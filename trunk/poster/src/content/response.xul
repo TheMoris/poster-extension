@@ -6,7 +6,7 @@
         xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="Response.init(window.arguments[0])">
    <script type="application/x-javascript" src="chrome://poster/content/Response.js"/>
    <vbox  style="overflow: auto" flex="100">
-      <description id="title"/>
+      <h:div id="title"/>
       <hbox>
          <label value="Status:"/>
          <label id="code" value=""/>

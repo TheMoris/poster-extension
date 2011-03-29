@@ -6,6 +6,10 @@
         xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="GoogleLogin.init(window.arguments[0])">
    <script type="application/x-javascript" src="chrome://poster/content/GoogleLogin.js"/>
    <script type="application/x-javascript" src="chrome://poster/content/HTTP.js"/>
+   <h:div>
+   <h:p>Enter your username, password, and service for your google account to get a ClientLogin token that can be used for subsequent
+        authentication.  This information is sent to <h:code>https://www.google.com/accounts/ClientLogin</h:code> to receive the authentication token.  If you are concerned, you can review the <h:a href="chrome://poster/content/GoogleLogin.js" target="new">javascript code</h:a> run by this extension.</h:p>
+   </h:div>
    <label id="failure" flex="2" value=""/>
    <grid flex="2">
       <columns>
