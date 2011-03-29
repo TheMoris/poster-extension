@@ -8,6 +8,10 @@ var Response = {
          this.addResponseHeader(name,data.headers[name]);
       }
    },
+   timeout: function(data) {
+      var titleE = document.getElementById("title");
+      titleE.appendChild(document.createTextNode(data.title));
+   },
    setResponseStatus: function(status) {
       document.getElementById("code").value = status;
    },

@@ -66,6 +66,20 @@ div.drop-area {
    margin-left: 0.3em;
 }
 
+#timeout-response {
+   min-width: 35em;
+   min-height: 8em;
+}
+
+#timeout-response #title {
+   margin-top: 1em;
+   text-align: center;
+}
+
+#timeout-response .message {
+   margin-left: 1em;
+}
+
 .small-buttons button {
    padding: 0pt;
    font-size: 75%;
