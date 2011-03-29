@@ -265,17 +265,26 @@ PosterApp.prototype.onResult = function(status,xml,text,headers,statusText) {
       this.progressDialog.close();
       this.progressDialog = null;
    }
-   var title = this.synopsis;
-   var resultWindow = window.openDialog(
-      'chrome://poster/content/response.xul','response'+(new Date()).getTime(),'centerscreen,chrome,resizable',
-      {
-         title: title,
-         status: status,
-         statusText: statusText,
-         content: text,
-         headers: headers
-      }
-   );
+   
+   if (status==0) {
+      window.openDialog(
+         'chrome://poster/content/timeout.xul','response'+(new Date()).getTime(),'centerscreen,chrome,resizable',
+         {
+            title: this.synopsis
+         }
+      );
+   } else {
+      window.openDialog(
+         'chrome://poster/content/response.xul','response'+(new Date()).getTime(),'centerscreen,chrome,resizable',
+         {
+            title: this.synopsis,
+            status: status,
+            statusText: statusText,
+            content: text,
+            headers: headers
+         }
+      );
+   }
 }
    
 PosterApp.prototype.sendFileToURL = function(urlstr,method,fpath,ctype) {
