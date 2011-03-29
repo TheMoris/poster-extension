@@ -96,3 +96,8 @@ div.drop-area {
    padding: 0.2em;
    padding-left: 0.5em;
 }
+
+
+#google-login[authstate="auth"] image {
+   border: 2px solid red;
+}
