@@ -28,7 +28,7 @@ var app = new PosterApp();
             <row>
                <label value="User Auth:"/>
                <hbox flex="1">
-                  <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><toolbarbutton id="google-login" image="chrome://poster/skin/login.png" tooltiptext="Login to your google account via ClientLogin" oncommand="app.showGoogleLogin()"/>
+                  <textbox id='username' flex="1"/><textbox id='password' type='password' flex="1"/><hbox flex="0"><toolbarbutton id="google-login" image="chrome://poster/skin/login.png" tooltiptext="Login to your google account via ClientLogin." oncommand="app.showGoogleLogin()" flex="0"/></hbox>
                </hbox>
             </row>
             <row>
@@ -108,13 +108,13 @@ var app = new PosterApp();
                <label value="Name:"/>
                <textbox id="header-name"  flex="1"/><label value="Value:"/><textbox id="header-value" flex="2"/><button label="Add/Change" oncommand="app.onAddChangeHeader()"/>
             </hbox>
-            <listbox id="header-list" seltype="multiple" onselect="app.onSelectHeaderItem()">
+            <listbox id="header-list" seltype="multiple" onselect="app.onSelectHeaderItem()" flex="1">
                <listhead>
                   <listheader label="Name"/>
                   <listheader label="Value"/>
                </listhead>
                <listcols>
-                  <listcol flex="1"/>
+                  <listcol/>
                   <splitter/>
                   <listcol flex="2"/>
                </listcols>
@@ -125,13 +125,13 @@ var app = new PosterApp();
                <label value="Name:"/>
                <textbox id="parameter-name"  flex="1"/><label value="Value:"/><textbox id="parameter-value" flex="2"/><button label="Add/Change" oncommand="app.onAddChangeParameter()"/>
             </hbox>
-            <listbox id="parameter-list" seltype="multiple" onselect="app.onSelectItemParameter()">
+            <listbox id="parameter-list" seltype="multiple" onselect="app.onSelectParameterItem()" flex="1">
                <listhead>
                   <listheader label="Name"/>
                   <listheader label="Value"/>
                </listhead>
                <listcols>
-                  <listcol flex="1"/>
+                  <listcol/>
                   <splitter/>
                   <listcol flex="2"/>
                </listcols>

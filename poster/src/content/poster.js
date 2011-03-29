@@ -101,22 +101,29 @@ PosterApp.prototype.browseForFile = function() {
 
 PosterApp.prototype.showGoogleLogin = function() {
    var currentApp = this;
+   var button = document.getElementById('google-login');
    var data = {
       username: this.elements["username"].value,
       password: this.elements["password"].value,
-      service: currentApp.lastService,
-      auth: null
+      auth: null,
+      service: "",
+      onSuccess: function() {
+         currentApp.googleAuth = this.auth;
+         currentApp.addRequestHeader("Authorization","GoogleLogin auth="+this.auth);
+         button.setAttribute("tooltiptext","Logged into "+data.username+", click to login to a different service.");
+         button.setAttribute("authstate","auth");
+      },
+      onCancel: function() {
+         currentApp.googleAuth = null;
+         currentApp.deleteHeaderByName("Authorization");
+         button.setAttribute("authstate","");
+         button.setAttribute("tooltiptext","Login to your google account via ClientLogin.");
+      }
    };
    window.openDialog(
       'chrome://poster/content/google-login.xul','google-login','centerscreen,chrome,resizable',
       data
    );
-   if (data.success) {
-      this.googleAuth = data.auth;
-      this.requestHeaders["authorization"] = "GoogleLogin auth="+this.googleAuth;
-      document.getElementById('google-login').setAttribute("label","Google Auth'd");
-   }
-   this.servive = data.service;
 }
    
 PosterApp.prototype.showEncoder = function() {
@@ -494,12 +501,12 @@ PosterApp.prototype.onAddChangeHeader = function() {
       return;
    }
    var value = document.getElementById("header-value").value;
-   this.requestHeaders[name] = value;
    this.addRequestHeader(name,value);
 }
 
 PosterApp.prototype.addRequestHeader = function(name,value) {
    try {
+   this.requestHeaders[name] = value;
    var list = document.getElementById("header-list");
    var len = list.getRowCount();
    var item = null;
@@ -548,6 +555,30 @@ PosterApp.prototype.onDeleteHeader = function() {
    }
 }
 
+PosterApp.prototype.deleteHeaderByName = function(name) {
+   var list = document.getElementById("header-list");
+   var len = list.getRowCount();
+   var item = null;
+   for (var i=0; i<len; i++) {
+      item = list.getItemAtIndex(i);
+      var nameCell = item.getElementsByTagName('listcell').item(0);
+      if (nameCell.getAttribute('label')==name) {
+         break;
+      }
+      item = null;
+   }
+   if (item) {
+      var cells = item.getElementsByTagName('listcell');
+      var nameCell = cells.item(0);
+      delete this.requestHeaders[nameCell.getAttribute("label")];
+      list.removeItemAt(list.getIndexOfItem(item));
+   }
+}
+
+PosterApp.prototype.onSelectHeaderItem = function() {
+
+}
+
 PosterApp.prototype.onAddChangeParameter = function() {
    var name = document.getElementById("parameter-name").value;
    if (!name) {
@@ -556,6 +587,10 @@ PosterApp.prototype.onAddChangeParameter = function() {
    var value = document.getElementById("parameter-value").value;
    this.parameters[name] = value;
    this.addParameter(name,value);
+}
+
+PosterApp.prototype.onSelectParameterItem = function() {
+
 }
 
 PosterApp.prototype.addParameter = function(name,value) {

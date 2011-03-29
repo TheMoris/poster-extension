@@ -34,7 +34,7 @@
    <hbox>
       <spacer flex="1"/>
       <button label="Authenticate" oncommand="GoogleLogin.authenticate();"/>
-      <button label="Close" oncommand="GoogleLogin.cancel();window.close();"/>
+      <button label="Cancel Authentication" oncommand="GoogleLogin.cancel();window.close();"/>
       <spacer flex="1"/>
    </hbox>
 

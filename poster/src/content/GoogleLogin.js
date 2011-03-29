@@ -24,7 +24,7 @@ var GoogleLogin = {
       if (!password) {
          password = "";
       }
-      var loginBody = "service="+service+"&Email="+username+"&Passwd="+password;
+      var loginBody = "service="+service+"&Email="+username+"&Passwd="+password+"&accountType=HOSTED_OR_GOOGLE";
       HTTP("POST","https://www.google.com/accounts/ClientLogin",{
          timeout: 30*1000,
          contentType: "application/x-www-form-urlencoded",
@@ -53,6 +53,7 @@ var GoogleLogin = {
       this.data.username = document.getElementById('username').value;
       this.data.password = document.getElementById('password').value;
       this.data.service = document.getElementById('service').value;
+      this.data.onSuccess();
       setTimeout(function(){ window.close(); },200);
    },
    cancel: function() {
@@ -60,6 +61,7 @@ var GoogleLogin = {
       this.data.username = document.getElementById('username').value;
       this.data.password = document.getElementById('password').value;
       this.data.service = document.getElementById('service').value;
+      this.data.onCancel();
       window.close();
    }
    
