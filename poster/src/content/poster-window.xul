@@ -51,15 +51,16 @@ var app = new PosterApp();
       <menulist id="method">
          <menupopup>
             <menuitem label="GET" value="GET"/>
-            <menuitem label="POST" value="POST"/>
-            <menuitem label="PUT" value="PUT"/>
+            <menuitem label="COPY" value="COPY"/>
             <menuitem label="DELETE" selected="true" value="DELETE"/>
             <menuitem label="HEAD" value="HEAD"/>
-            <menuitem label="OPTIONS" value="OPTIONS"/>
-            <menuitem label="PROPFIND" value="PROPFIND"/>
             <menuitem label="MKCOL" value="MKCOL"/>
-            <menuitem label="COPY" value="COPY"/>
             <menuitem label="MOVE" value="MOVE"/>
+            <menuitem label="OPTIONS" value="OPTIONS"/>
+            <menuitem label="POST" value="POST"/>
+            <menuitem label="PUT" value="PUT"/>
+            <menuitem label="PROPFIND" value="PROPFIND"/>
+            <menuitem label="TRACE" value="TRACE"/>
          </menupopup>
       </menulist>
       <toolbarbutton image="chrome://poster/skin/submit.png" tooltiptext="Send the HTTP Request" oncommand="app.doMethodRequest();"/>
