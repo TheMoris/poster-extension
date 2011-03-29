@@ -59,7 +59,7 @@
             <menuitem label="DELETE" selected="true" value="DELETE"/>
             <menuitem label="HEAD" value="HEAD"/>
             <menuitem label="OPTIONS" value="OPTIONS"/>
-            <menuitem label="PROFIND" value="PROPFIND"/>
+            <menuitem label="PROPFIND" value="PROPFIND"/>
             <menuitem label="COPY" value="COPY"/>
             <menuitem label="MOVE" value="MOVE"/>
          </menupopup>
