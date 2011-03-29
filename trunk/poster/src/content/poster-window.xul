@@ -97,7 +97,7 @@ var app = new PosterApp();
                   </row>
                   <row>
                     <label value="Content Options:"/>
-                    <hbox><button id='base64-encode' label="Base64"/><button label="Parameter Body" oncommand="app.makeParameterPost()"/></hbox>
+                    <hbox><button id='base64-encode' label="Base64 Encode"/><button label="Body from Parameters" oncommand="app.makeParameterPost()"/></hbox>
                   </row>
                  </rows>
              </grid>
