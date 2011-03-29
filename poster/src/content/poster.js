@@ -576,7 +576,13 @@ PosterApp.prototype.deleteHeaderByName = function(name) {
 }
 
 PosterApp.prototype.onSelectHeaderItem = function() {
-
+   var list = document.getElementById("header-list");
+   var item = list.getSelectedItem(0);
+   var cells = item.getElementsByTagName('listcell');
+   var nameCell = cells.item(0);
+   var valueCell = cells.item(1);
+   document.getElementById("header-name").value = nameCell.getAttribute("label")
+   document.getElementById("header-value").value = valueCell.getAttribute("label")
 }
 
 PosterApp.prototype.onAddChangeParameter = function() {
@@ -590,6 +596,13 @@ PosterApp.prototype.onAddChangeParameter = function() {
 }
 
 PosterApp.prototype.onSelectParameterItem = function() {
+   var list = document.getElementById("parameter-list");
+   var item = list.getSelectedItem(0);
+   var cells = item.getElementsByTagName('listcell');
+   var nameCell = cells.item(0);
+   var valueCell = cells.item(1);
+   document.getElementById("parameter-name").value = nameCell.getAttribute("label")
+   document.getElementById("parameter-value").value = valueCell.getAttribute("label")
 
 }
 
