@@ -13,9 +13,25 @@
    max-width: none !important;
 }
 
+#googleLogin {
+   max-width: 550px;
+}
+
+#googleLogin div {
+   margin-left: 1em;
+}
+
+#googleLogin a:link {
+   color: blue;
+   text-decoration: underline;
+}
 page,window,dialog {
    font-size: 0.9em;
    font-family: Arial, Helvetica, Sans-Serif;
+}
+
+*{
+   -moz-user-select: text
 }
 
 row {
@@ -44,6 +60,10 @@ div.drop-area {
    font-size: 110%;
    min-width: 400px;
    min-height: 300px;
+}
+
+#response grid {
+   margin-left: 0.3em;
 }
 
 .small-buttons button {

@@ -18,8 +18,9 @@ var Response = {
       var grid = document.getElementById("headers");
       var row = grid.ownerDocument.createElement("row");
       grid.appendChild(row);
-      var nameLabel = row.ownerDocument.createElement("label");
-      nameLabel.setAttribute("value",name);
+      var nameLabel = row.ownerDocument.createElement("description");
+      nameLabel.appendChild(row.ownerDocument.createTextNode(name));
+      //nameLabel.setAttribute("value",name);
       row.appendChild(nameLabel);
       var valueLabel = row.ownerDocument.createElement("textbox");
       valueLabel.setAttribute("value",value);
