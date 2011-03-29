@@ -65,7 +65,7 @@ var app = new PosterApp();
       <toolbarbutton image="chrome://poster/skin/submit.png" tooltiptext="Send the HTTP Request" oncommand="app.doMethodRequest();"/>
       <separator orient="vertical" class="groove"/>
       <spacer flex="1"/>
-      <toolbarbutton image="chrome://poster/skin/preferences.png" tooltiptext="Save displayed values as default preferences." oncommand="app.savePreferences()"/>
+      <toolbarbutton image="chrome://poster/skin/preferences.png" tooltiptext="Save displayed values as default preferences." oncommand="app.showPreferences()"/>
       </hbox>
    </groupbox>
    <groupbox flex="2">

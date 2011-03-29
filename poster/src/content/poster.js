@@ -54,6 +54,9 @@ PosterApp.prototype.init = function() {
    this.elements["timeout-slider"].onchange = function() {
       current.elements["timeout"].value = current.elements["timeout-slider"].value;
    }
+   this.elements["timeout"].onchange = function() {
+      current.elements["timeout-slider"].value = current.elements["timeout"].value;
+   }
    document.getElementById("base64-encode").onclick = function() {
       var value = current.elements["content"].value;
       if (value.length>0) {
@@ -73,10 +76,20 @@ PosterApp.prototype.init = function() {
    };
 }
 
-PosterApp.prototype.savePreferences = function() {
-   this.setPreferenceString("contentType",this.elements["contentType"].value);
-   this.setPreferenceString("url",this.elements["url"].value);
-   this.setPreferenceString("timeout",this.elements["timeout-slider"].value);
+PosterApp.prototype.savePreferences = function(options) {
+   if (options.contentType) {
+      this.setPreferenceString("contentType",this.elements["contentType"].value);
+   }
+   if (options.url) {
+      this.setPreferenceString("url",this.elements["url"].value);
+   }
+   if (options.timeout) {
+      this.setPreferenceString("timeout",this.elements["timeout-slider"].value);
+   }
+   if (options.headers) {
+   }
+   if (options.parameters) {
+   }
 }
    
 /*
@@ -126,6 +139,16 @@ PosterApp.prototype.showGoogleLogin = function() {
    );
 }
    
+PosterApp.prototype.showPreferences = function() {
+   var data = {
+      app: this
+   };
+   window.openDialog(
+      'chrome://poster/content/saving-prefs.xul','saving-prefs','centerscreen,chrome,resizable',
+      data
+   );
+}
+
 PosterApp.prototype.showEncoder = function() {
    var currentApp = this;
    window.openDialog(
