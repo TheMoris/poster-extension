@@ -86,6 +86,12 @@ var app = new PosterApp();
                </columns>
                <rows>
                   <row>
+                      <label value="Send Content"/>
+                      <hbox>
+                         <checkbox id="send-checkbox" checked="true"/>
+                      </hbox>
+                  </row>
+                  <row>
                       <label value="File:"/>
                       <hbox>
                          <textbox id="filename" flex="2"/>

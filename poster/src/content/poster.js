@@ -34,6 +34,7 @@ PosterApp.prototype.setPreferenceString = function(name,value){
 
 PosterApp.prototype.init = function() {
 
+   this.elements["send-checkbox"] = document.getElementById("send-checkbox");
    this.elements["filename"] = document.getElementById("filename");
    this.elements["contentType"] = document.getElementById("ctype");
    this.elements["username"] = document.getElementById("username");
@@ -252,19 +253,35 @@ PosterApp.prototype.putURL = function() {
 }
    
 PosterApp.prototype.getURL = function() {
-   this.handleGet("GET");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("GET",true);
+   } else {
+      this.handleGet("GET");
+   }
 }
    
 PosterApp.prototype.deleteURL = function() {
-   this.handleGet("DELETE")
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("DELETE",true);
+   } else {
+      this.handleGet("DELETE");
+   }
 }
    
 PosterApp.prototype.headURL = function() {
-   this.handleGet("HEAD");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("HEAD",true);
+   } else {
+      this.handleGet("HEAD");
+   }
 }
    
 PosterApp.prototype.optionsURL = function() {
-   this.handleGet("OPTIONS");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("OPTIONS",true);
+   } else {
+      this.handleGet("OPTIONS");
+   }
 }
 
 PosterApp.prototype.propfindURL = function() {
@@ -272,18 +289,30 @@ PosterApp.prototype.propfindURL = function() {
 }
 
 PosterApp.prototype.mkcolURL = function() {
-   this.handleGet("MKCOL");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("MKCOL",true);
+   } else {
+      this.handleGet("MKCOL");
+   }
 }
 
 PosterApp.prototype.copyURL = function() {
-   this.handleGet("COPY");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("COPY",true);
+   } else {
+      this.handleGet("COPY");
+   }
 }
 
 PosterApp.prototype.moveURL = function() {
-   this.handleGet("MOVE");
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("MOVE",true);
+   } else {
+      this.handleGet("MOVE");
+   }
 }
    
-PosterApp.prototype.handleSend = function(method) {
+PosterApp.prototype.handleSend = function(method,allowEmpty) {
    var fpath = this.elements["filename"].value;
    var content = this.elements["content"].value;
    var urlstr = this.elements["url"].value;
@@ -294,15 +323,15 @@ PosterApp.prototype.handleSend = function(method) {
    }
    if (urlstr.length==0) {
       alert("A URL must be specified.");
-      /*
-   } else if (fpath.length==0 && content.length==0) {
-      alert("Either a file or content must be specified.");
-      */
    } else if (urlstr.indexOf(':')<=0) {
       alert("You have not specified a valid URI.");
       return;
    } else if (fpath.length!=0 && content.length!=0) {
-      alert("You can't have both a file and content to send.");
+      if (allowEmpty) {
+         this.handleGet(method);
+      } else {
+         alert("You can't have both a file and content to send.");
+      }
    } else if (fpath.length!=0) {
       this.synopsis = method+" on "+urlstr;
       this.sendFileToURL(urlstr,method,fpath,ctype);
