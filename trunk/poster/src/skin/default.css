@@ -26,7 +26,7 @@
    text-decoration: underline;
 }
 page,window,dialog {
-   font-size: 0.9em;
+   font-size: 1em;
    font-family: Arial, Helvetica, Sans-Serif;
 }
 
@@ -57,7 +57,6 @@ div.drop-area {
 
 #response #content {
    font-family: monospace;
-   font-size: 110%;
    min-width: 400px;
    min-height: 300px;
 }
