@@ -11,6 +11,7 @@ SavePrefs.prototype.onSave = function() {
       url: document.getElementById("url").checked,
       contentType: document.getElementById("content-type").checked,
       timeout: document.getElementById("timeout").checked,
+      content: document.getElementById("content").checked,
       headers: document.getElementById("headers").checked,
       parameters: document.getElementById("parameters").checked
    }
