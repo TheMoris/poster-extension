@@ -45,6 +45,7 @@ PosterApp.prototype.init = function() {
    this.elements["timeout"] = document.getElementById("timeout");
 
    this.elements["contentType"].value = this.getPreferenceString("contentType");
+   this.elements["content"].value = this.getPreferenceString("content");
    this.elements["url"].value = this.getPreferenceString("url");
    var timeoutPref = this.getPreferenceString("timeout");
    if (timeoutPref) {
@@ -107,6 +108,9 @@ PosterApp.prototype.savePreferences = function(options) {
    }
    if (options.url) {
       this.setPreferenceString("url",this.elements["url"].value);
+   }
+   if (options.content) {
+      this.setPreferenceString("content",this.elements["content"].value);
    }
    if (options.timeout) {
       this.setPreferenceString("timeout",this.elements["timeout-slider"].value);

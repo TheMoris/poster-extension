@@ -10,6 +10,7 @@
       <checkbox id='url' label="URL?" checked="true"/>
       <checkbox id='content-type' label="Content type?" checked="true"/>
       <checkbox id='timeout' label="Timeout?" checked="true"/>
+      <checkbox id='content' label="Content?" checked="false"/>
       <checkbox id='headers' label="Headers?" checked="false"/>
       <checkbox id='parameters' label="Parameters?" checked="false"/>
    </vbox>
