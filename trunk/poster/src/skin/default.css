@@ -1,7 +1,5 @@
 #poster-window {
    min-width: 450px;
-   width: 550px;
-   height: 700px;
    overflow: auto;
 }
 
