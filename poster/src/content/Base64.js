@@ -100,7 +100,10 @@ Base64.prototype._utf8_encode = function (string) {
 Base64.prototype._utf8_decode = function (utftext) {
   var string = "";
   var i = 0;
-  var c = c1 = c2 = 0;
+  var c = 0;
+  var c1 = 0;
+  var c2 = 0;
+  var c3 = 0;
 
   while ( i < utftext.length ) {
 
