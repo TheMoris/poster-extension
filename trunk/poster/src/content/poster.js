@@ -231,6 +231,8 @@ PosterApp.prototype.doMethodRequest = function() {
       this.copyURL();
    } else if (method=="MOVE") {
       this.moveURL();
+   } else if (method=="CONNECT") {
+      this.connectURL();
    }
 }
    
@@ -316,6 +318,14 @@ PosterApp.prototype.moveURL = function() {
    }
 }
    
+PosterApp.prototype.connectURL = function() {
+   if (this.elements["send-checkbox"].checked) {
+      this.handleSend("CONNECT",true);
+   } else {
+      this.handleGet("CONNECT");
+   }
+}
+
 PosterApp.prototype.handleSend = function(method,allowEmpty) {
    var fpath = this.elements["filename"].value;
    var content = this.elements["content"].value;
