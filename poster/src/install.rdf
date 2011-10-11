@@ -6,7 +6,7 @@
   
     <em:id>{d48a39ba-8f80-4fce-8ee1-bc710561c55d}</em:id>
     <em:name>Poster</em:name>
-    <em:version>3.0.0</em:version>
+    <em:version>3.1.0</em:version>
     <em:description>A developer tool for interacting with URLs</em:description>
     <em:creator>Alex Milowski</em:creator>
     <em:homepageURL>http://code.google.com/p/poster-extension/</em:homepageURL>
@@ -16,7 +16,7 @@
     <em:targetApplication>
        <RDF:Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                     em:minVersion="1.5"
-                    em:maxVersion="4.0.*" />
+                    em:maxVersion="6.*" />
     </em:targetApplication>
 
   </RDF:Description>
