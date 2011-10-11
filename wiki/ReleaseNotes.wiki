@@ -6,6 +6,7 @@
  * added support for sending entity body for methods like DELETE, etc.
  * added first time page 
  * added support for optionally saving content to settings
+ * removed automatic window sizing (defaults to open window size)
 
 == 3.1 ==
 
